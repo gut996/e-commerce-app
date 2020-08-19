@@ -29,6 +29,8 @@ const Header = ({currentUser}) => (
 );
 
 const mapStateToProps = state => ({
+  //because we used combinedReducer, that's why we are accessing the 'user' property before the currentUser
+  //state.<userReducer>.currentUser
   currentUser: state.user.currentUser
 });
 
