@@ -15,10 +15,23 @@ function App() {
   useEffect(() => {
     let unsubscribeFromAuth = null;
 
-    unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      setCurrentUser(user);
-      // console.log(user);
-      createUserProfileDocument(user);
+    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      // createUserProfileDocument(userAuth);
+      // setCurrentUser(userAuth);
+
+      if(userAuth){
+        //get back userRef if database has updated
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        })
+      }else{
+        setCurrentUser(userAuth);
+      }
     });
 
     //componentDidUnmount

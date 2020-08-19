@@ -13,14 +13,25 @@ const config = {
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
+    //if the useauth object doesnt exists
     if(!userAuth) return;
 
+    //query the firestore for the doc to see if it already exists
     const userRef = firestore.doc(`users/${userAuth.uid}`);
 
+    
+    //to understand what we will get back.
+    //firestore returns us two types of objects: references and snapshots
+    //of these objects, they can be either document or collection versions.
+    
+    //firestore will always return us these objects, even if nothing exists at from that query.
+
+    //we use document references to perform CRUD methods (create,retrieve, update and delete)
+
+    //we get the snapshotObject from the reference object using the .get() method
     const snapShot = await userRef.get();
 
     if(!snapShot.exists){
-        // console.log(snapShot);
         const {displayName, email} = userAuth;
         const createdAt = new Date();
 
