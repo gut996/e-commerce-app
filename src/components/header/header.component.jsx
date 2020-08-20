@@ -5,8 +5,10 @@ import './header.styles.scss';
 import {connect} from 'react-redux';
 
 import {auth} from '../../firebase/firebase.util';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser, hidden}) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
       <img src={Logo} alt='logo'  className='logo' />
@@ -24,14 +26,19 @@ const Header = ({currentUser}) => (
         :
         <Link className="option" to='/signin'>SIGN IN</Link>
       }
+      <CartIcon />
     </div>
+    {
+      hidden ? null : <CartDropdown />
+    }
   </div>
 );
 
 const mapStateToProps = state => ({
   //because we used combinedReducer, that's why we are accessing the 'user' property before the currentUser
   //state.<userReducer>.currentUser
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
+  hidden: state.cart.hidden
 });
 
 export default connect(mapStateToProps)(Header);
