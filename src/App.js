@@ -56,6 +56,7 @@ function App({setCurrentUser, currentUser}) {
   );
 }
 
+//get state from redux store
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser
 })
