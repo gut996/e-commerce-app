@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -50,7 +50,7 @@ function App({setCurrentUser}) {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
-        <Route path='/signin' component={SignInAndSignUpPage} />
+        <Route exact path='/signin' component={SignInAndSignUpPage} />
       </Switch>
     </div>
   );
