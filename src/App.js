@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 
 import './App.css';
 
@@ -10,6 +11,7 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/SignInAndSignUpPage
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.util';
 import { setCurrentUser } from './redux/user/user.action';
+import {selectCurrentUser} from './redux/user/user.selector'
 
 function App({setCurrentUser, currentUser}) {
   // const [currentUser, setCurrentUser] = useState(null);
@@ -57,8 +59,12 @@ function App({setCurrentUser, currentUser}) {
 }
 
 //get state from redux store
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser
+// const mapStateToProps = (state) => ({
+//   currentUser: state.user.currentUser
+// })
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchtoProps = dispatch => ({
