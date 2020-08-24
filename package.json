@@ -18,6 +18,7 @@
     "redux-persist": "^6.0.0",
     "reselect": "^4.0.0"
   },
+  "homepage": "https://hanger-ltd.herokuapp.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
